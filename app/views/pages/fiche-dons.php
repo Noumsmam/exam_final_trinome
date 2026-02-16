@@ -16,7 +16,7 @@
             </div>
 
             <div class="creer-besoin card" style="margin-top:12px;">
-                <form action="#" method="post" style="display:flex;gap:8px;align-items:center;">
+                <form action="/save_don" method="post" style="display:flex;gap:8px;align-items:center;">
                     <select name="besoin" id="besoin" class="input">
                         <!-- boucle -->
                         <option value="0">Selectionner</option>
@@ -24,6 +24,8 @@
                             <option value="<?php echo $row['id_article']; ?>"><?php echo $row['nom_article']; ?></option>
                         <?php } ?>
                     </select>
+                        <input type="hidden" value="<?php echo $fiche['id_ville']; ?>" name="id_ville">
+                        <input type="number" name="qtn">
                     <button class="button" type="submit">Valider</button>
                 </form>
             </div>

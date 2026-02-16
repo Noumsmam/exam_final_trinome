@@ -110,6 +110,9 @@ $router->group('', function (Router $router) use ($app) {
         ]);
     });
 
+    $router->post('/save_besoin',[RequeteController::class,'saveBesoin']);
+
+    $router->post('/save_don',[RequeteController::class,'saveDon']);
 
     // $router->get('/', function() use ($app) {
     // 	$app->render('welcome', [ 'message' => 'You are gonna do great things!' ]);

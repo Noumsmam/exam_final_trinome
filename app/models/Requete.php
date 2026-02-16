@@ -83,5 +83,15 @@
             $stmt->execute([$id]);
             return $stmt->fetchAll();
         }
+
+        public function saveBesoin($id_ville,$qtn,$id_article,$montant) { 
+            $stmt = $this->db->prepare("INSERT INTO BNGRC_requete(id_ville,id_article,quantite,montant_total,date_requete,etat) VALUES (?,?,?,?,CURDATE(),'BESOIN') ");
+            $stmt->execute([$id_ville,$id_article,$qtn,$montant]);
+        }
+
+        public function saveDon($id_ville,$qtn,$id_article,$montant) { 
+            $stmt = $this->db->prepare("INSERT INTO BNGRC_requete(id_ville,id_article,quantite,montant_total,date_requete,etat) VALUES (?,?,?,?,CURDATE(),'DON') ");
+            $stmt->execute([$id_ville,$id_article,$qtn,$montant]);
+        }
     }
 ?>
