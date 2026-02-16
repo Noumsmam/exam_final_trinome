@@ -29,7 +29,7 @@
             </div>
 
             <div class="liste-besoin" style="margin-top:18px;">
-                <?php foreach($listeDon as $Row) { ?>
+                <?php foreach($listeDon as $row) { ?>
                     <div class="besoin card">
                         <span class="title"><?php echo $row['nom_article']; ?></span>
                         <div class="item-mesure">
