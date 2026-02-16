@@ -97,7 +97,7 @@ date_dispatch
 -   Protection injections SQL
 -   Gestion erreurs
 
-
+=======================================================
 Rova 3883 — FRONT-END
 
 1.  Structure UI
@@ -109,8 +109,12 @@ Rova 3883 — FRONT-END
 
 2.  Pages à créer
 
-Dashboard - Tableau des villes - Besoins par ville - Dons reçus - Reste
-à couvrir - Indicateur visuel si besoin satisfait
+-Dashboard :
+    - Tableau des villes 
+    - Besoins par ville 
+    - Dons reçus 
+    - Reste à couvrir 
+    - Indicateur visuel si besoin satisfait (facultatif)
 
 Ajouter Besoin - Formulaire - Sélecteur ville - Sélecteur type -
 Validation visuelle
