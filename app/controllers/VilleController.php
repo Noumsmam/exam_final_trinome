@@ -4,7 +4,7 @@
     use flight\Engine;
     use app\models\Ville;
     use Flight;
-    class Villecontroller {
+    class VilleController {
         protected Engine $app;
 
 

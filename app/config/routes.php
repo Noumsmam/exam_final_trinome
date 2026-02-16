@@ -1,7 +1,8 @@
 <?php
 
 use app\controllers\ArticleController;
-use app\controllers\Villecontroller;
+use app\controllers\RequeteController;
+use app\controllers\VilleController;
 use app\middlewares\SecurityHeadersMiddleware;
 use flight\Engine;
 use flight\net\Router;
@@ -32,7 +33,7 @@ $router->group('', function (Router $router) use ($app) {
     });
 
 	$router->get('/besoins', function() use ($renderPage) {
-        $villeC = new Villecontroller();
+        $villeC = new VilleController();
         $liste = $villeC->getville();
         $renderPage('besoins', [
             'title' => 'Besoins',
@@ -41,8 +42,11 @@ $router->group('', function (Router $router) use ($app) {
     });
 
     $router->get('/dons', function () use ($renderPage) {
+        $villeC = new VilleController();
+        $liste = $villeC->getville();
         $renderPage('dons', [
-            'title' => 'Dons'
+            'title' => 'Dons',
+            'liste' => $liste
         ]);
     });
 
@@ -57,18 +61,34 @@ $router->group('', function (Router $router) use ($app) {
         $villeC = new VilleController();
         $fiche = $villeC->getVilleFiche($id);
 
-        $articleC = new Articlecontroller();
+        $articleC = new ArticleController();
         $liste = $articleC->getArtile();
+
+        $besoin = new RequeteController();
+        $listeBesoin = $besoin->getBesoinByVille($id);
         $renderPage('fiche-besoins', [
             'title' => 'Fiche besoin',
             'fiche' => $fiche,
-            'listeArticle' => $liste
+            'listeArticle' => $liste,
+            'listeBesoin' => $listeBesoin
         ]);
     });
 
     $router->get('/fiche-dons', function () use ($renderPage) {
+        $id = $_GET['id'];
+        $villeC = new VilleController();
+        $fiche = $villeC->getVilleFiche($id);
+
+        $articleC = new ArticleController();
+        $liste = $articleC->getArtile();
+
+        $don = new RequeteController();
+        $listeDon = $don->getDonByVille($id);
         $renderPage('fiche-dons', [
-            'title' => 'Fiche don'
+            'title' => 'Fiche don',
+            'fiche' => $fiche,
+            'listeArticle' => $liste,
+            'listeDon' => $listeDon
         ]);
     });
 
@@ -85,8 +105,8 @@ $router->group('', function (Router $router) use ($app) {
     });
 
     $router->get('/dispatch', function () use ($renderPage) {
-        $renderPage('Dispatch', [
-            'title' => 'Dispatch'
+        $renderPage('dispatch', [
+            'title' => 'dispatch'
         ]);
     });
 

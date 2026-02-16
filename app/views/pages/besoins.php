@@ -9,14 +9,14 @@
 
 <body>
 
-    <?php foreach ($liste as $row) { ?>
-        <div class="liste-ville">
+    <div class="liste-ville">
+        <?php foreach ($liste as $row) { ?>
             <div class="ville card">
                 <div class="item-info"><span class="title"><?php echo $row['nom_ville']; ?></span></div>
                 <div class="item-actions"><a href="<?= BASE_URL ?>fiche-besoins?id=<?php echo $row['id_ville']; ?>" class="button">Voir besoins</a></div>
             </div>
-        </div>
-    <?php } ?>
+        <?php } ?>
+    </div>
 
 </body>
 
