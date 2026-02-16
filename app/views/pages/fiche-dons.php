@@ -31,60 +31,58 @@
             </div>
 
             <div class="liste-besoin" style="margin-top:18px;">
-
-
                 <div class="besoin card">
                     <span class="title">Katsaka</span>
                     <div class="item-mesure">
                         <p style="font-weight: bold;">Qte:</p>
-                        <p> 200kg</p>
+                        <p> 100kg</p>
                         <p style="font-weight: bold">Date: </p>
-                        <p>12/01/26</p>
+                        <p>15/01/26</p>
                     </div>
                 </div>
                 <div class="besoin card">
                     <span class="title">Vary</span>
                     <div class="item-mesure">
                         <p style="font-weight: bold;">Qte:</p>
-                        <p> 400kg</p>
+                        <p> 200kg</p>
                         <p style="font-weight: bold">Date: </p>
-                        <p>12/01/26</p>
+                        <p>13/01/26</p>
                     </div>
                 </div>
                 <div class="besoin card">
                     <span class="title">Ronono</span>
                     <div class="item-mesure">
                         <p style="font-weight: bold;">Qte:</p>
-                        <p> 50l</p>
+                        <p> 100l</p>
                         <p style="font-weight: bold">Date: </p>
-                        <p>12/01/26</p>
+                        <p>13/01/26</p>
                     </div>
                 </div>
                 <div class="besoin card">
                     <span class="title">Tole</span>
                     <div class="item-mesure">
                         <p style="font-weight: bold;">Qte:</p>
-                        <p> 400m</p>
+                        <p> 500m</p>
                         <p style="font-weight: bold">Date: </p>
-                        <p>12/01/26</p>
+                        <p>13/01/26</p>
                     </div>
                 </div>
                 <div class="besoin card">
                     <span class="title">Planche</span>
                     <div class="item-mesure">
                         <p style="font-weight: bold;">Qte:</p>
-                        <p> 250</p>
+                        <p> 400</p>
                         <p style="font-weight: bold">Date: </p>
-                        <p>12/01/26</p>
+                        <p>13/01/26</p>
                     </div>
                 </div>
                 <div class="besoin card">
                     <span class="title">Akanjo</span>
                     <div class="item-mesure">
                         <p style="font-weight: bold;">Qte:</p>
-                        <p> 2 bal</p>
+                        <p> 1 bal</p>
                         <p style="font-weight: bold">Date: </p>
-                        <p>12/01/26</p>
+                        <p>13/01/26</p>
                     </div>
                 </div>
             </div>

@@ -6,38 +6,40 @@
 </head>
 <body>
 
-    <div class="liste-ville">
+    <div class="container">
+        <div class="liste-ville">
 
-        <div class="ville">
-            <p>Antananarivo</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
+            <div class="ville card">
+                <div class="item-info"><span class="title">Antananarivo</span></div>
+                <div class="item-actions"><a href="<?= BASE_URL ?>fiche-besoins" class="button">Voir besoins</a></div>
+            </div>
+
+            <div class="ville card">
+                <div class="item-info"><span class="title">Toamasina</span></div>
+                <div class="item-actions"><a href="<?= BASE_URL ?>fiche-besoins" class="button">Voir besoins</a></div>
+            </div>
+
+            <div class="ville card">
+                <div class="item-info"><span class="title">Fianarantsoa</span></div>
+                <div class="item-actions"><a href="<?= BASE_URL ?>fiche-besoins" class="button">Voir besoins</a></div>
+            </div>
+
+            <div class="ville card">
+                <div class="item-info"><span class="title">Toliara</span></div>
+                <div class="item-actions"><a href="<?= BASE_URL ?>fiche-besoins" class="button">Voir besoins</a></div>
+            </div>
+
+            <div class="ville card">
+                <div class="item-info"><span class="title">Mahajanga</span></div>
+                <div class="item-actions"><a href="<?= BASE_URL ?>fiche-besoins" class="button">Voir besoins</a></div>
+            </div>
+
+            <div class="ville card">
+                <div class="item-info"><span class="title">Antsinanana</span></div>
+                <div class="item-actions"><a href="<?= BASE_URL ?>fiche-besoins" class="button">Voir besoins</a></div>
+            </div>
+
         </div>
-
-        <div class="ville">
-            <p>Toamasina</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
-        </div>
-
-        <div class="ville">
-            <p>Fianarantsoa</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
-        </div>
-
-        <div class="ville">
-            <p>Toliara</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
-        </div>
-
-        <div class="ville">
-            <p>Mahajanga</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
-        </div>
-
-        <div class="ville">
-            <p>Antsinanana</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
-        </div>
-
     </div>
 
 </body>
