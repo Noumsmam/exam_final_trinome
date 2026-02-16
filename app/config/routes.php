@@ -1,6 +1,7 @@
 <?php
 
-use app\controllers\ApiExampleController;
+use app\controllers\ArticleController;
+use app\controllers\Villecontroller;
 use app\middlewares\SecurityHeadersMiddleware;
 use flight\Engine;
 use flight\net\Router;
@@ -26,12 +27,16 @@ $router->group('', function (Router $router) use ($app) {
     $router->get('/', function () use ($renderPage) {
         $renderPage('dashboard', [
             'title' => 'Dashboard'
+            
         ]);
     });
 
-    $router->get('/besoins', function () use ($renderPage) {
+	$router->get('/besoins', function() use ($renderPage) {
+        $villeC = new Villecontroller();
+        $liste = $villeC->getville();
         $renderPage('besoins', [
-            'title' => 'Besoins'
+            'title' => 'Besoins',
+            'liste' => $liste
         ]);
     });
 
@@ -47,9 +52,17 @@ $router->group('', function (Router $router) use ($app) {
         ]);
     });
 
-    $router->get('/fiche-besoins', function () use ($renderPage) {
+    $router->get('/fiche-besoins', function() use ($renderPage) {
+        $id = $_GET['id'];
+        $villeC = new VilleController();
+        $fiche = $villeC->getVilleFiche($id);
+
+        $articleC = new Articlecontroller();
+        $liste = $articleC->getArtile();
         $renderPage('fiche-besoins', [
-            'title' => 'Fiche besoin'
+            'title' => 'Fiche besoin',
+            'fiche' => $fiche,
+            'listeArticle' => $liste
         ]);
     });
 
