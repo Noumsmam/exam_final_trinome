@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,39 +7,14 @@
 </head>
 <body>
 
-    <div class="liste-ville">
-
-        <div class="ville">
-            <p>Antananarivo</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
+    <?php foreach($liste as $row) { ?>
+        <div class="liste-ville">
+            <div class="ville">
+                <p><?php echo $row['nom_ville']; ?></p>
+                <a href="<?= BASE_URL ?>/fiche-besoins?id=<?php echo $row['id_ville']; ?>"><button>Voir besoins</button></a>
+            </div>
         </div>
-
-        <div class="ville">
-            <p>Toamasina</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
-        </div>
-
-        <div class="ville">
-            <p>Fianarantsoa</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
-        </div>
-
-        <div class="ville">
-            <p>Toliara</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
-        </div>
-
-        <div class="ville">
-            <p>Mahajanga</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
-        </div>
-
-        <div class="ville">
-            <p>Antsinanana</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
-        </div>
-
-    </div>
+    <?php } ?>
 
 </body>
 </html>

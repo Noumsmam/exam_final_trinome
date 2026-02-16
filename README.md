@@ -13,4 +13,3 @@ o raha misy conflit de manao an ito :
 
 o raha tsisy detonga de ito 
     - git push origin dev
-

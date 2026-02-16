@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use flight\Engine;
 
-class ApiExampleController {
+class UserController {
 
 	protected Engine $app;
 
