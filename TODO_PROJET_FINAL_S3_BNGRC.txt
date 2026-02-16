@@ -1,0 +1,161 @@
+PROJET FINAL S3 - APPLICATION BNGRC
+
+TO-DO LIST REPARTIE POUR 3 PERSONNES
+
+1) ANALYSE DU PROJET
+
+Application de suivi des collectes et dispatch de dons pour les
+sinistrés. Objectif principal : Dashboard affichant : - Liste des
+villes - Leurs besoins - Les dons attribués - Simulation de dispatch
+automatique par ordre de date
+
+Règles importantes : - Besoin = prix unitaire fixe + quantité - Pas
+d’identification individuelle des sinistrés - Dispatch par ordre de
+saisie (FIFO)
+
+Rova 3904 — BASE DE DONNÉES (BD) 
+
+1.  Conception
+
+-   Analyse des entités
+-   Création du MCD
+-   Création du MLD
+-   Script SQL final
+
+2.  Tables à créer
+
+Table ville - id - nom
+
+Table besoin - id - ville_id (FK) - type (nature / materiaux / argent) -
+libelle (riz, huile, tôle…) - prix_unitaire - quantite - date_saisie
+
+Table don - id - type - libelle - montant (si argent) - quantite (si
+nature/materiaux) - date_saisie
+
+Table dispatch - id - don_id - besoin_id - quantite_attribuee -
+date_dispatch
+
+3.  Contraintes
+
+-   Clés étrangères
+-   Prix unitaire non modifiable
+-   Index sur dates
+
+4.  Données de test
+
+-   Insérer villes
+-   Insérer besoins
+-   Insérer dons
+
+ Nomena  — BACK-END
+
+1.  Architecture
+
+-   Structure MVC
+-   Connexion BD
+-   Routes principales
+
+2.  Gestion des Villes
+
+-   Ajouter ville
+-   Lister villes
+
+3.  Gestion des Besoins
+
+-   Formulaire ajout besoin
+-   Enregistrement en BD
+-   Calcul total besoin (prix * quantité)
+
+4.  Gestion des Dons
+
+-   Formulaire ajout don
+-   Enregistrement en BD
+-   Gestion des types
+
+5.  Algorithme de Dispatch
+
+-   Trier dons par date ASC
+-   Trier besoins par date ASC
+-   Associer don → besoin
+-   Réduire quantité restante
+-   Enregistrer dans table dispatch
+-   Gérer cas :
+    -   Don insuffisant
+    -   Don supérieur au besoin
+    -   Don argent
+
+6.  API / Logique Dashboard
+
+-   Récupérer besoins par ville
+-   Total reçu
+-   Reste à recevoir
+-   Requêtes optimisées
+
+7.  Sécurité
+
+-   Validation formulaires
+-   Protection injections SQL
+-   Gestion erreurs
+
+=======================================================
+Rova 3883 — FRONT-END
+
+1.  Structure UI
+
+-   Layout principal
+-   Navbar
+-   Dashboard
+-   Pages CRUD
+
+2.  Pages à créer
+
+-Dashboard :
+    - Tableau des villes 
+    - Besoins par ville 
+    - Dons reçus 
+    - Reste à couvrir 
+    - Indicateur visuel si besoin satisfait (facultatif)
+
+Ajouter Besoin - Formulaire - Sélecteur ville - Sélecteur type -
+Validation visuelle
+
+Ajouter Don - Formulaire - Type - Quantité / Montant
+
+3.  Design
+
+-   Responsive
+-   Bootstrap ou CSS personnalisé
+-   Design clair et institutionnel
+
+4.  UX
+
+-   Messages succès/erreur
+-   Loading
+-   Confirmation dispatch
+
+ PHASE DE TEST (TOUS)
+
+
+-   Test ajout ville
+-   Test ajout besoin
+-   Test ajout don
+-   Test dispatch
+-   Test affichage dashboard
+-   Test cas erreurs
+
+ LIVRAISON
+
+
+Préparation : - Nettoyer code - Commentaires propres - README - Dump
+base de données
+
+Déploiement serveur ITU : - Upload fichiers - Import base - Config
+connexion - Tests en ligne
+
+ PLANNING RECOMMANDÉ
+(26H) 
+
+Jour 1 - 3h : Conception BD - 6h : Back + CRUD - 4h : Front base
+
+Jour 2 - 5h : Algorithme dispatch - 3h : Dashboard - 3h : Tests - 2h :
+Déploiement
