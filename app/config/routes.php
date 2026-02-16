@@ -31,13 +31,13 @@ $router->group('', function(Router $router) use ($app) {
 
 	$router->get('/besoins', function() use ($renderPage) {
         $renderPage('besoins', [
-            'title' => 'Dashboard'
+            'title' => 'Besoins'
         ]);
     });
 
 	$router->get('/dons', function() use ($renderPage) {
         $renderPage('dons', [
-            'title' => 'Dashboard'
+            'title' => 'Dons'
         ]);
     });
 
@@ -46,6 +46,14 @@ $router->group('', function(Router $router) use ($app) {
             'title' => 'Dashboard'
         ]);
     });
+
+    $router->get('/fiche-besoins', function() use ($renderPage) {
+        $renderPage('fiche-besoins', [
+            'title' => 'Fiche besoin'
+        ]);
+    });
+
+
 
 
 	// $router->get('/', function() use ($app) {

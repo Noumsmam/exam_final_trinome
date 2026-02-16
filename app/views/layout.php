@@ -1,6 +1,7 @@
 <?php
 // Use the application-generated CSP nonce (set in config.php)
 // SecurityHeadersMiddleware already sends the CSP header.
+
 $nonce = '';
 if (class_exists('\Flight')) {
   $nonce = \Flight::get('csp_nonce') ?? '';
@@ -14,12 +15,15 @@ if (class_exists('\Flight')) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= $title ?? 'Takalo Takalo' ?></title>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="<?=BASE_URL?>assets/css/style.css">
 </head>
 
 <body>
+
+  <?= BASE_URL ?>
+
   <?php
-    include 'fragments/header.html';
+    include 'fragments/header.php';
   ?>
 
   <main id="view-content">
