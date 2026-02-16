@@ -1,0 +1,137 @@
+.modern-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(135deg, #0f3057, #00587a);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+/* Container */
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 18px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo */
+.logo a {
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+/* Menu desktop */
+.nav-links {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    position: relative;
+    transition: 0.3s ease;
+}
+
+/* Effet hover souligné */
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    left: 0;
+    bottom: -4px;
+    background: #ffb703;
+    transition: 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Bouton spécial */
+.highlight {
+    background: #ffb703;
+    color: #000 !important;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.highlight:hover {
+    background: #ffd166;
+    transform: translateY(-2px);
+}
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    font-size: 26px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+
+    .nav-links {
+        position: absolute;
+        top: 75px;
+        right: 20px;
+        flex-direction: column;
+        background: #0f3057;
+        padding: 20px;
+        border-radius: 15px;
+        display: none;
+        width: 230px;
+    }
+
+    .nav-links a {
+        padding: 10px 0;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+    }
+}
+
+
+.site-footer{
+    border: 1px solid black;
+    background-color: #000;
+}
+
+.site-footer .footer-inner{
+    color: white;
+    width: 300px;
+    margin: auto;
+    text-align: center;
+}
+
+.liste-ville{
+    width: 1000px;
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.liste-ville table{
+    margin: auto;
+}
+

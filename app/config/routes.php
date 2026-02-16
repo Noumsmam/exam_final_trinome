@@ -13,18 +13,53 @@ use flight\net\Router;
 // This wraps all routes in the group with the SecurityHeadersMiddleware
 $router->group('', function(Router $router) use ($app) {
 
-	$router->get('/', function() use ($app) {
-		$app->render('welcome', [ 'message' => 'You are gonna do great things!' ]);
-	});
+	$renderPage = function(string $view, array $data = []) use ($app) {
+        // Génère le contenu de la page
+        $content = $app->view()->fetch('pages/' . $view . '.php', $data);
+    
+        // Affiche le layout en injectant le contenu
+        $app->render('layout.php', array_merge($data, [
+            'content' => $content
+        ]));
+    };
 
-	$router->get('/hello-world/@name', function($name) {
-		echo '<h1>Hello world! Oh hey '.$name.'!</h1>';
-	});
+	$router->get('/', function() use ($renderPage) {
+        $renderPage('dashboard', [
+            'title' => 'Dashboard'
+        ]);
+    });
 
-	$router->group('/api', function() use ($router) {
-		$router->get('/users', [ ApiExampleController::class, 'getUsers' ]);
-		$router->get('/users/@id:[0-9]', [ ApiExampleController::class, 'getUser' ]);
-		$router->post('/users/@id:[0-9]', [ ApiExampleController::class, 'updateUser' ]);
-	});
+	$router->get('/besoins', function() use ($renderPage) {
+        $renderPage('besoins', [
+            'title' => 'Dashboard'
+        ]);
+    });
+
+	$router->get('/dons', function() use ($renderPage) {
+        $renderPage('dons', [
+            'title' => 'Dashboard'
+        ]);
+    });
+
+	$router->get('/reste', function() use ($renderPage) {
+        $renderPage('reste', [
+            'title' => 'Dashboard'
+        ]);
+    });
+
+
+	// $router->get('/', function() use ($app) {
+	// 	$app->render('welcome', [ 'message' => 'You are gonna do great things!' ]);
+	// });
+
+	// $router->get('/hello-world/@name', function($name) {
+	// 	echo '<h1>Hello world! Oh hey '.$name.'!</h1>';
+	// });
+
+	// $router->group('/api', function() use ($router) {
+	// 	$router->get('/users', [ ApiExampleController::class, 'getUsers' ]);
+	// 	$router->get('/users/@id:[0-9]', [ ApiExampleController::class, 'getUser' ]);
+	// 	$router->post('/users/@id:[0-9]', [ ApiExampleController::class, 'updateUser' ]);
+	// });
 	
 }, [ SecurityHeadersMiddleware::class ]);
