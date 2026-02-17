@@ -8,6 +8,7 @@
       <a href="<?= BASE_URL ?>dispatch">Dispatch</a>
       <a href="<?= BASE_URL ?>creation-article">Création Articles</a>
       <a href="<?= BASE_URL ?>stock">Stock</a>
+      <a href="<?= BASE_URL ?>achats">Achats</a>
     </nav>
   </div>
 </header>

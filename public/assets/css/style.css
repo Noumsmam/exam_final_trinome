@@ -577,3 +577,33 @@ select,
     display: inline-block;
     text-decoration: none;
 }
+
+.filtre{
+    width: 200px;
+}
+
+.filtre form{
+    display: flex;
+    justify-content: space-between;
+}
+
+.filtre form select {
+    padding: 10px 16px;
+    border-radius: 5px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    width: 150px;
+    color: #000;
+}
+
+.liste-achats{
+    padding: 10px 0 0 0;
+}
+
+.achats-card{
+    display: flex;
+    justify-content: space-between;
+}

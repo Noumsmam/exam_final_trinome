@@ -61,6 +61,53 @@ use app\models\Requete;
             return $liste;
         } 
 
+        // API for AJAX: return besoins for a ville (HTML fragment)
+        public function apiAchats() {
+            $id_ville = $_GET['ville'] ?? null;
+            $requete = new Requete(Flight::db());
+            if ($id_ville) {
+                $liste = $requete->findAllRequeteBesoinbyidVille($id_ville);
+            } else {
+                $liste = $requete->findAll();
+            }
+
+            // Render a minimal fragment
+            foreach ($liste as $row) {
+                $montant = $row['prix_unitaire'] * $row['quantite'];
+                echo "<div class=\"besoin card\">";
+                echo "<div><strong>".htmlspecialchars($row['nom_article'])."</strong></div>";
+                echo "<div>Quantité: ".htmlspecialchars($row['quantite'])."</div>";
+                echo "<div>Montant: ".number_format($montant,2,',',' ')."</div>";
+                echo "<div><button class=\"simulate\" data-montant=\"$montant\">Simuler</button></div>";
+                echo "</div>";
+            }
+        }
+
+        // API recap returns JSON totals
+        public function apiRecap() {
+            $requete = new Requete(Flight::db());
+            $totals = $requete->getTotals();
+            header('Content-Type: application/json');
+            echo json_encode($totals);
+        }
+
+        // Simulate an achat: returns cost with fee
+        public function simulateAchat() {
+            $montant = floatval($_POST['montant'] ?? 0);
+            $config = Flight::get('config') ?? [];
+            $feePercent = $config['purchase_fee_percent'] ?? 10;
+            $total = $montant * (1 + $feePercent / 100.0);
+            header('Content-Type: application/json');
+            echo json_encode(['montant' => $montant, 'fee_percent' => $feePercent, 'total' => $total]);
+        }
+
+        // Validate achat (placeholder: real dispatch algorithm not implemented)
+        public function validerAchat() {
+            // For now just return success — real dispatch should consume 'don argent' and create/update dispatch records
+            header('Content-Type: application/json');
+            echo json_encode(['success' => true, 'message' => 'Achat validé (simulation).']);
+        }
+
         public function createArticle(){
             $req = new Article(Flight::db());
             $requeteData = [
