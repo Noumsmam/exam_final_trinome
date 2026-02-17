@@ -1,10 +1,11 @@
 <?php
     namespace app\controllers;
 
+    use app\models\Achat;
     use flight\Engine;
     use app\models\Article;
     use Flight;
-    class Articlecontroller {
+    class AchatController {
         protected Engine $app;
 
 
@@ -12,9 +13,9 @@
 
         }
 
-        public function getArtile() {
-            $article = new Article(Flight::db());
-            $liste = $article->findAll();
+        public function getAllAchat() {
+            $achat = new Achat(Flight::db());
+            $liste = $achat->findAll();
             return $liste;
         }
 
