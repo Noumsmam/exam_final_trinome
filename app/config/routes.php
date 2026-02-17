@@ -55,8 +55,11 @@ $router->group('', function (Router $router) use ($app) {
     });
 
     $router->get('/reste', function () use ($renderPage) {
+        $req = new RequeteController();
+        $liste = $req->getBesoinEnCours();
         $renderPage('reste', [
-            'title' => 'Dashboard'
+            'title' => 'Besoins restants',
+            'liste' => $liste
         ]);
     });
 
