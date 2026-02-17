@@ -7,14 +7,14 @@
 </head>
 
 <body>
-    <div class="creer-besoin">
+    <div class="creer-besoin2">
         <form action="" method="post" class="card">
 
             <label for="nom">Nom du don</label>
             <input type="text" name="nom" id="nom" required>
 
             <label for="quantite">Quantité</label>
-            <input type="number" name="quantite" id="quantite" min="1" required>
+            <input class="input" type="number" name="quantite" id="quantite" min="1" required>
 
             <label for="type">Unité</label>
             <select name="type" id="type" required>
