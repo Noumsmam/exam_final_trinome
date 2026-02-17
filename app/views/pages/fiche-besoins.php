@@ -25,7 +25,7 @@
                         <?php } ?>
                     </select>
                     <input type="hidden" value="<?php echo $fiche['id_ville']; ?>" name="id_ville">
-                    <input type="number" name="qtn">
+                    <input class="input" type="number" name="qtn">
                     <button class="button" type="submit">Valider</button>
                 </form>
             </div>

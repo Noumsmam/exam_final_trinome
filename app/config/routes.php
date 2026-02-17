@@ -6,6 +6,7 @@ use app\controllers\RequeteController;
 use app\controllers\VilleController;
 use app\middlewares\SecurityHeadersMiddleware;
 use app\models\Dispatch;
+use app\models\TypeArticle;
 use flight\Engine;
 use flight\net\Router;
 
@@ -94,15 +95,12 @@ $router->group('', function (Router $router) use ($app) {
         ]);
     });
 
-    $router->get('/creation-besoin', function () use ($renderPage) {
-        $renderPage('creation-besoin', [
-            'title' => 'Création besoin'
-        ]);
-    });
-
-    $router->get('/creation-don', function () use ($renderPage) {
-        $renderPage('creation-don', [
-            'title' => 'Création don'
+    $router->get('/creation-article', function () use ($renderPage) {
+        $req = new TypeArticle(Flight::db());
+        $liste_type = $req->findAll();
+        $renderPage('creation-article', [
+            'title' => 'Création article',
+            'liste_type' => $liste_type
         ]);
     });
 
@@ -120,6 +118,8 @@ $router->group('', function (Router $router) use ($app) {
     $router->post('/save_don',[RequeteController::class,'saveDon']);
 
     $router->get('/repartir',[DispatchController::class,'repartir']);
+
+    $router->post('/create-article', [RequeteController::class, 'createArticle']);
 
     // $router->get('/', function() use ($app) {
     // 	$app->render('welcome', [ 'message' => 'You are gonna do great things!' ]);

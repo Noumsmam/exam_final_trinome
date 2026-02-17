@@ -12,7 +12,7 @@
         public function save($requeteData){
             $stmt = $this->db->prepare(
                 "INSERT INTO BNGRC_requete (
-                id_ville,
+              
                 id_article,
                 quantite,
                 montant_total,
