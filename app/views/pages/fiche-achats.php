@@ -13,7 +13,7 @@
                 <p style="font-weight: bold">Ville:</p>
                 <select class="input" name="ville" id="ville">
                     <option value="all">Toutes les villes</option>
-                    <?php foreach ($liste as $row) { ?>
+                    <?php foreach ($listeVille as $row) { ?>
                         <option value="<?php echo $row['id_ville']; ?>"><?php echo $row['nom_ville']; ?></option>
                     <?php } ?>
                 </select>
@@ -26,40 +26,16 @@
                 <p>Quantité</p>
                 <p>Prix Unitaire</p>
                 <p>Total</p>
-                <!-- <div class="nom-ville"><p>Ville</p></div>
-                <div class="nom-ville"><p>Item</p></div>
-                <div class="dispatch-besoin"><p>Quantité</p></div>
-                <div class="dispatch-qte"><p>Prix Unitaire</p></div>
-                <div class="dispatch-date"><p>Total</p></div> -->
             </div>
-            <div class="achats-card card">
-                <p>Antananarivo</p>
-                <p>Paracetamol</p>
-                <p>50</p>
-                <p>10000 Ar</p>
-                <p>500000 Ar</p>
-            </div>
-            <div class="achats-card card">
-                <p>Antananarivo</p>
-                <p>Paracetamol</p>
-                <p>50</p>
-                <p>10000 Ar</p>
-                <p>50000 Ar</p>
-            </div>
-            <div class="achats-card card">
-                <p>Antananarivo</p>
-                <p>Paracetamol</p>
-                <p>50</p>
-                <p>10000 Ar</p>
-                <p>50000 Ar</p>
-            </div>
-            <div class="achats-card card">
-                <p>Antananarivo</p>
-                <p>Paracetamol</p>
-                <p>50</p>
-                <p>10000 Ar</p>
-                <p>50000 Ar</p>
-            </div>
+            <?php foreach($liste as $row) { ?>
+                <div class="achats-card card">
+                    <p><?php echo $row['nom_ville']; ?> </p>
+                    <p><?php echo $row['nom_article']; ?></p>
+                    <p><?php echo $row['quantite']; ?></p>
+                    <p><?php echo $row['prix_unitaire']; ?></p>
+                    <p><?php echo $row['prix_unitaire'] * $row['quantite']; ?></p>
+                </div>
+            <?php }  ?>
         </div>
     </div>
 </body>

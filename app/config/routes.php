@@ -5,6 +5,7 @@ use app\controllers\DispatchController;
 use app\controllers\RequeteController;
 use app\controllers\VilleController;
 use app\middlewares\SecurityHeadersMiddleware;
+use app\controllers\AchatController;
 use app\models\Dispatch;
 use app\models\Requete;
 use app\models\TypeArticle;
@@ -127,11 +128,14 @@ $router->group('', function (Router $router) use ($app) {
     });
 
     $router->get('/fiche-achats', function () use ($renderPage) {
+        $achat = new AchatController();
+        $liste = $achat->getAllAchat();
         $villeC = new VilleController();
-        $liste = $villeC->getville();
+        $listeVille = $villeC->getville();
         $renderPage('fiche-achats', [
             'title' => 'Fiche achats',
-            'liste' => $liste
+            'liste' => $liste,
+            'listeVille' => $listeVille
         ]);
     });
 

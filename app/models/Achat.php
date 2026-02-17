@@ -2,60 +2,18 @@
     namespace app\models;
     use Flight;
 
-    class User{
+    class Achat{
         private $db;
 
         public function __construct($db){
             $this->db = $db;
         }
 
-        public function save($userData){
-            $stmt = $this->db->prepare(
-                "INSERT INTO BNGRC_user (
-                username,
-                email,
-                password
-                ) VALUES (?, ?, ?)"
-            );
-
-            $stmt->execute([
-                $userData['username'],
-                $userData['email'],
-                $userData['password']
-            ]);
-        }
-
-        public function findByEmail($email) {
-            $stmt = $this->db->prepare("SELECT * FROM BNGRC_user WHERE email = ?");
-            $stmt->execute([$email]);
-            return $stmt->fetch();
-        }
-
-        public function updateUser($nouveauUser){
-            $stmt = $this->db->prepare(
-                "UPDATE BNGRC_user SET
-                username = ?,
-                email = ?,
-                password = ?,
-                WHERE id_user = ?"
-            );
-
-            $stmt->execute([
-                $nouveauUser['username'],
-                $nouveauUser['email'],
-                $nouveauUser['password'],
-                $nouveauUser['id']
-            ]);
-        }
-
-        public function deleteUser($id){
-            $stmt = $this->db->prepare("DELETE FROM BNGRC_user WHERE id_user = ?");
-            $stmt->execute([$id]);
-        }
-
-        public function findAll(){
-            $stmt = $this->db->query("SELECT * FROM BNGRC_user");
+        public function findAll() {
+            $stmt=$this->db->query("SELECT BNGRC_ville.nom_ville,BNGRC_article.nom_article,BNGRC_achat.montant,BNGRC_achat.quantite,BNGRC_article.prix_unitaire
+            FROM BNGRC_achat JOIN BNGRC_ville ON BNGRC_achat.id_ville = BNGRC_ville.id_ville JOIN BNGRC_article ON BNGRC_achat.id_article = BNGRC_article.id_article  ");
             return $stmt->fetchAll();
         }
+
     }
 ?>
