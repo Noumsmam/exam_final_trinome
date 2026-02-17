@@ -57,5 +57,7 @@
             $stmt = $this->db->query("SELECT * FROM BNGRC_article");
             return $stmt->fetchAll();
         }
+
+        
     }
 ?>

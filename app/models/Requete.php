@@ -103,7 +103,7 @@
 
         public function getDON()  {
             $stmt= $this->db->query("SELECT BNGRC_requete.id_requete,BNGRC_requete.quantite,BNGRC_requete.id_ville,BNGRC_ville.nom_ville,BNGRC_requete.date_requete,BNGRC_article.nom_article,SUM(BNGRC_requete.quantite) AS stock
-            FROM BNGRC_requete JOIN BNGRC_article ON BNGRC_requete.id_article = BNGRC_article.id_article JOIN  BNGRC_ville ON BNGRC_requete.id_ville = BNGRC_ville.id_ville WHERE BNGRC_requete.etat = 'DON' ORDER BY BNGRC_requete.date_requete GROUP BY BNGRC_article.nom_article");
+            FROM BNGRC_requete JOIN BNGRC_article ON BNGRC_requete.id_article = BNGRC_article.id_article JOIN  BNGRC_ville ON BNGRC_requete.id_ville = BNGRC_ville.id_ville WHERE BNGRC_requete.etat = 'DON' GROUP BY BNGRC_article.nom_article ORDER BY BNGRC_requete.date_requete");
             return $stmt->fetchAll();
         }     
         public function sumQuantiteByArticle() {
