@@ -12,7 +12,7 @@
         public function save($requeteData){
             $stmt = $this->db->prepare(
                 "INSERT INTO BNGRC_requete (
-                id_ville,
+              
                 id_article,
                 quantite,
                 montant_total,
@@ -72,7 +72,7 @@
 
        public function findDonsByVille($id_ville){
             $stmt = $this->db->prepare("SELECT BNGRC_article.nom_article,BNGRC_article.prix_unitaire,BNGRC_requete.quantite,BNGRC_requete.date_requete 
-            FROM BNGRC_requete  JOIN BNGRC_ville ON BNGRC_requete.id_ville = BNGRC_ville.id_ville JOIN BNGRC_article ON BNGRC_article.id_article = BNGRC_requete.id_article WHERE BNGRC_requete.etat = 'DON' AND BNGRC_requete.id_ville = ? ");
+            FROM BNGRC_requete  JOIN BNGRC_ville ON BNGRC_requete.id_ville = BNGRC_ville.id_ville JOIN BNGRC_article ON BNGRC_article.id_article = BNGRC_requete.id_article WHERE BNGRC_requete.etat = 'DON' AND BNGRC_requete.id_ville = ? AND BNGRC_requete.statut = 'fini'");
             $stmt->execute([$id_ville]);
             return $stmt->fetchAll();
         }
@@ -85,13 +85,110 @@
         }
 
         public function saveBesoin($id_ville,$qtn,$id_article,$montant) { 
-            $stmt = $this->db->prepare("INSERT INTO BNGRC_requete(id_ville,id_article,quantite,montant_total,date_requete,etat) VALUES (?,?,?,?,CURDATE(),'BESOIN') ");
+            $stmt = $this->db->prepare("INSERT INTO BNGRC_requete(id_ville,id_article,quantite,montant_total,date_requete,etat,statut) VALUES (?,?,?,?,CURDATE(),'BESOIN','en cours') ");
             $stmt->execute([$id_ville,$id_article,$qtn,$montant]);
         }
 
         public function saveDon($id_ville,$qtn,$id_article,$montant) { 
-            $stmt = $this->db->prepare("INSERT INTO BNGRC_requete(id_ville,id_article,quantite,montant_total,date_requete,etat) VALUES (?,?,?,?,CURDATE(),'DON') ");
+            $stmt = $this->db->prepare("INSERT INTO BNGRC_requete(id_ville,id_article,quantite,montant_total,date_requete,etat,statut) VALUES (?,?,?,?,CURDATE(),'DON','en cours') ");
             $stmt->execute([$id_ville,$id_article,$qtn,$montant]);
         }
+
+        public function getBesoinEnCours() {
+            $stmt = $this->db->query("SELECT BNGRC_requete.id_requete,BNGRC_requete.quantite,BNGRC_requete.id_ville,BNGRC_ville.nom_ville,BNGRC_requete.date_requete,BNGRC_article.nom_article
+            FROM BNGRC_requete JOIN BNGRC_article ON BNGRC_requete.id_article = BNGRC_article.id_article JOIN 
+            BNGRC_ville ON BNGRC_requete.id_ville = BNGRC_ville.id_ville WHERE BNGRC_requete.statut = 'en cours' AND BNGRC_requete.etat = 'BESOIN'");
+            return $stmt->fetchAll();
+        }
+
+        public function getDON()  {
+            $stmt= $this->db->query("SELECT BNGRC_requete.id_requete,BNGRC_requete.quantite,BNGRC_requete.id_ville,BNGRC_ville.nom_ville,BNGRC_requete.date_requete,BNGRC_article.nom_article,SUM(BNGRC_requete.quantite) AS stock
+            FROM BNGRC_requete JOIN BNGRC_article ON BNGRC_requete.id_article = BNGRC_article.id_article JOIN  BNGRC_ville ON BNGRC_requete.id_ville = BNGRC_ville.id_ville WHERE BNGRC_requete.etat = 'DON' GROUP BY BNGRC_article.nom_article ORDER BY BNGRC_requete.date_requete");
+            return $stmt->fetchAll();
+        }     
+        public function sumQuantiteByArticle() {
+            $stmt = $this->db->query("SELECT BNGRC_article.id_article, BNGRC_article.nom_article, SUM(BNGRC_requete.quantite) AS total_quantite 
+            FROM BNGRC_requete 
+            JOIN BNGRC_article ON BNGRC_requete.id_article = BNGRC_article.id_article WHERE BNGRC_requete.etat = 'DON' 
+            GROUP BY BNGRC_article.id_article, BNGRC_article.nom_article
+            ORDER BY BNGRC_requete.date_requete ");
+            return $stmt->fetchAll();
+        }
+
+        public function uptdateQuantite($qtn,$id) {
+            $stmt = $this->db->prepare("UPDATE BNGRC_requete SET quantite = ? WHERE id_requete = ? ");
+            $stmt->execute([$qtn,$id]);
+        }
+
+        public function getAllDons() {
+            $stmt = $this->db->query("SELECT BNGRC_requete.id_requete, BNGRC_requete.quantite, BNGRC_requete.id_article, BNGRC_article.nom_article, BNGRC_requete.date_requete
+            FROM BNGRC_requete
+            JOIN BNGRC_article ON BNGRC_requete.id_article = BNGRC_article.id_article
+            WHERE BNGRC_requete.etat = 'DON'
+            ORDER BY BNGRC_requete.date_requete");
+            return $stmt->fetchAll();
+        }
+
+        // Totals for recap page
+        public function getTotals() {
+            $totals = [];
+            // total besoins montant
+            $stmt = $this->db->query("SELECT IFNULL(SUM(montant_total),0) as total_besoins FROM BNGRC_requete WHERE etat = 'BESOIN'");
+            $res = $stmt->fetch();
+            $totals['total_besoins'] = $res['total_besoins'] ?? 0;
+
+            // total besoins satisfaits (statut = 'satisfait')
+            $stmt = $this->db->query("SELECT IFNULL(SUM(montant_total),0) as total_satisfaits FROM BNGRC_requete WHERE etat = 'BESOIN' AND statut = 'satisfait'");
+            $res = $stmt->fetch();
+            $totals['total_satisfaits'] = $res['total_satisfaits'] ?? 0;
+
+            // remaining
+            $totals['total_restant'] = max(0, $totals['total_besoins'] - $totals['total_satisfaits']);
+
+            // total dons montant
+            $stmt = $this->db->query("SELECT IFNULL(SUM(montant_total),0) as total_dons FROM BNGRC_requete WHERE etat = 'DON'");
+            $res = $stmt->fetch();
+            $totals['total_dons'] = $res['total_dons'] ?? 0;
+
+            return $totals;
+        }
+
+        public function getTotalsByVille($id_ville) {
+            $totals = [];
+            $stmt = $this->db->prepare("SELECT IFNULL(SUM(montant_total),0) as total_besoins FROM BNGRC_requete WHERE etat = 'BESOIN' AND id_ville = ?");
+            $stmt->execute([$id_ville]);
+            $res = $stmt->fetch();
+            $totals['total_besoins'] = $res['total_besoins'] ?? 0;
+
+            $stmt = $this->db->prepare("SELECT IFNULL(SUM(montant_total),0) as total_satisfaits FROM BNGRC_requete WHERE etat = 'BESOIN' AND statut = 'satisfait' AND id_ville = ?");
+            $stmt->execute([$id_ville]);
+            $res = $stmt->fetch();
+            $totals['total_satisfaits'] = $res['total_satisfaits'] ?? 0;
+
+            $totals['total_restant'] = max(0, $totals['total_besoins'] - $totals['total_satisfaits']);
+
+            $stmt = $this->db->prepare("SELECT IFNULL(SUM(montant_total),0) as total_dons FROM BNGRC_requete WHERE etat = 'DON' AND id_ville = ?");
+            $stmt->execute([$id_ville]);
+            $res = $stmt->fetch();
+            $totals['total_dons'] = $res['total_dons'] ?? 0;
+
+            return $totals;
+        }
+
+        public function changeStatut($id) {
+            $stmt = $this->db->prepare("UPDATE BNGRC_requete SET statut = 'satisfait' WHERE id_requete = ?");
+            $stmt->execute([$id]);
+        }
+
+        public function changeStatutDon($id) {
+            $stmt = $this->db->prepare("UPDATE BNGRC_requete SET statut = 'epuise' WHERE id_requete = ?");
+            $stmt->execute([$id]);
+        }    
+    
     }
+        
+
+        
+
+    
 ?>

@@ -33,9 +33,9 @@ INSERT INTO BNGRC_article (nom_article, prix_unitaire, id_type_article) VALUES
 ('Vitamine C', 5000, 3);
 
 -- Insertions de données dans BNGRC_requete
-INSERT INTO BNGRC_requete (id_ville, id_article, quantite, montant_total, date_requete, etat) VALUES
-(1, 1, 10, 50000, '2023-01-01', 'BESOIN'),
-(2, 3, 5, 10000, '2023-01-02', 'DON'),
-(3, 4, 20, 60000, '2023-01-03', 'BESOIN'),
-(4, 5, 2, 50000, '2023-01-04', 'DON'),
-(5, 2, 3, 45000, '2023-01-05', 'BESOIN');
+INSERT INTO BNGRC_requete (id_ville, id_article, quantite, montant_total, date_requete, etat,statut) VALUES
+(1, 1, 10, 50000, '2023-01-01', 'BESOIN','fini'),
+(2, 3, 5, 10000, '2023-01-02', 'DON','en cours'),
+(3, 4, 20, 60000, '2023-01-03', 'BESOIN','en cours'),
+(4, 5, 2, 50000, '2023-01-04', 'DON','fini'),
+(5, 2, 3, 45000, '2023-01-05', 'BESOIN','en cours');

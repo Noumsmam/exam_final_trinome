@@ -90,6 +90,8 @@ $dsn = 'mysql:host=' . $config['database']['host'] . ';dbname=' . $config['datab
 $pdoClass = Debugger::$showBar === true ? PdoQueryCapture::class : PdoWrapper::class;
 $app->register('db', $pdoClass, [ $dsn, $config['database']['user'] ?? null, $config['database']['password'] ?? null ]);
 
+// Expose the loaded config to the application so controllers/views can access it
+$app->set('config', $config);
 /**********************************************
  *         Third-Party Integrations           *
  **********************************************/

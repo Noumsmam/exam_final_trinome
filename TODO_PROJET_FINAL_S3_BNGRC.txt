@@ -109,53 +109,18 @@ Rova 3883 — FRONT-END
 
 2.  Pages à créer
 
--Dashboard :
-    - Tableau des villes 
-    - Besoins par ville 
-    - Dons reçus 
-    - Reste à couvrir 
-    - Indicateur visuel si besoin satisfait (facultatif)
-
-Ajouter Besoin - Formulaire - Sélecteur ville - Sélecteur type -
-Validation visuelle
-
-Ajouter Don - Formulaire - Type - Quantité / Montant
+-besoins -> liste des villes avec lien vers besoins correspondant
+-dons -> liste des villes avec lien vers dons correspondant
+-fiche-besoins -> liste des besoins d'une ville + selection de besoin
+-fiche-dons -> liste des besoins d'une ville + selection de besoin
+-dispatch -> page dour distribuer les dons (dispatch par date, dispatch par proportinnalite, )
+-stock -> liste des dons disponibles chez bngrc
+-dashboard -> petit recap
+-
 
 3.  Design
 
 -   Responsive
--   Bootstrap ou CSS personnalisé
+-   CSS personnalisé
 -   Design clair et institutionnel
 
-4.  UX
-
--   Messages succès/erreur
--   Loading
--   Confirmation dispatch
-
- PHASE DE TEST (TOUS)
-
-
--   Test ajout ville
--   Test ajout besoin
--   Test ajout don
--   Test dispatch
--   Test affichage dashboard
--   Test cas erreurs
-
- LIVRAISON
-
-
-Préparation : - Nettoyer code - Commentaires propres - README - Dump
-base de données
-
-Déploiement serveur ITU : - Upload fichiers - Import base - Config
-connexion - Tests en ligne
-
- PLANNING RECOMMANDÉ
-(26H) 
-
-Jour 1 - 3h : Conception BD - 6h : Back + CRUD - 4h : Front base
-
-Jour 2 - 5h : Algorithme dispatch - 3h : Dashboard - 3h : Tests - 2h :
-Déploiement
