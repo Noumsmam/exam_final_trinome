@@ -32,11 +32,11 @@ $router->group('', function (Router $router) use ($app) {
     $router->get('/', function () use ($renderPage) {
         $renderPage('dashboard', [
             'title' => 'Dashboard'
-            
+
         ]);
     });
 
-	$router->get('/besoins', function() use ($renderPage) {
+    $router->get('/besoins', function () use ($renderPage) {
         $villeC = new VilleController();
         $liste = $villeC->getville();
         $renderPage('besoins', [
@@ -60,7 +60,7 @@ $router->group('', function (Router $router) use ($app) {
         ]);
     });
 
-    $router->get('/fiche-besoins', function() use ($renderPage) {
+    $router->get('/fiche-besoins', function () use ($renderPage) {
         $id = $_GET['id'];
         $villeC = new VilleController();
         $fiche = $villeC->getVilleFiche($id);
@@ -105,7 +105,7 @@ $router->group('', function (Router $router) use ($app) {
         ]);
     });
 
-    $router->get('/stock', function () use ($renderPage){
+    $router->get('/stock', function () use ($renderPage) {
         $req = new Requete(Flight::db());
         $stock = $req->getDON();
         $renderPage('stock', [
@@ -123,11 +123,36 @@ $router->group('', function (Router $router) use ($app) {
         ]);
     });
 
-    $router->post('/save_besoin',[RequeteController::class,'saveBesoin']);
+    // Achats page (liste filtrable par ville via AJAX)
+    $router->get('/achats', function () use ($renderPage) {
+        $villeC = new VilleController();
+        $liste = $villeC->getville();
+        $renderPage('achats', [
+            'title' => 'Besoins',
+            'liste' => $liste
+        ]);
+    });
 
-    $router->post('/save_don',[RequeteController::class,'saveDon']);
+    $router->get('/fiche-achats', function () use ($renderPage) {
+        $villeC = new VilleController();
+        $liste = $villeC->getville();
+        $renderPage('fiche-achats', [
+            'title' => 'Fiche achats',
+            'liste' => $liste
+        ]);
+    });
 
-    $router->get('/repartir',[DispatchController::class,'repartir']);
+    // API endpoints for AJAX
+    $router->get('/api/achats', [RequeteController::class, 'apiAchats']);
+    $router->get('/api/recap', [RequeteController::class, 'apiRecap']);
+    $router->post('/simulate_achat', [RequeteController::class, 'simulateAchat']);
+    $router->post('/valider_achat', [RequeteController::class, 'validerAchat']);
+
+    $router->post('/save_besoin', [RequeteController::class, 'saveBesoin']);
+
+    $router->post('/save_don', [RequeteController::class, 'saveDon']);
+
+    $router->get('/repartir', [DispatchController::class, 'repartir']);
 
     $router->post('/create-article', [RequeteController::class, 'createArticle']);
 
