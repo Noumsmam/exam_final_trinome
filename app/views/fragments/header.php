@@ -9,10 +9,7 @@
       <a href="<?= BASE_URL ?>creation-article">Création Articles</a>
       <a href="<?= BASE_URL ?>stock">Stock</a>
       <a href="<?= BASE_URL ?>fiche-achats">Achats</a>
-<<<<<<< HEAD
       <a href="<?= BASE_URL ?>reste">Reste</a>
-=======
->>>>>>> 5d6737b (achat changement)
     </nav>
   </div>
 </header>
