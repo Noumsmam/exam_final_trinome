@@ -123,16 +123,6 @@ $router->group('', function (Router $router) use ($app) {
         ]);
     });
 
-    // Achats page (liste filtrable par ville via AJAX)
-    $router->get('/achats', function () use ($renderPage) {
-        $villeC = new VilleController();
-        $liste = $villeC->getville();
-        $renderPage('achats', [
-            'title' => 'Besoins',
-            'liste' => $liste
-        ]);
-    });
-
     $router->get('/fiche-achats', function () use ($renderPage) {
         $villeC = new VilleController();
         $liste = $villeC->getville();
