@@ -62,7 +62,7 @@ use app\models\Requete;
         } 
 
         public function createArticle(){
-            $req = new Article((Flight::db()));
+            $req = new Article(Flight::db());
             $requeteData = [
                 'nom_article' => $_POST['nom'],
                 'prix_unitaire' => $_POST['prix'],
@@ -72,5 +72,6 @@ use app\models\Requete;
             Flight::redirect('/creation-article?num=1');
         }
 
+        
     }
 ?>

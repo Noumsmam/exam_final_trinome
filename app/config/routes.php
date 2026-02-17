@@ -6,6 +6,7 @@ use app\controllers\RequeteController;
 use app\controllers\VilleController;
 use app\middlewares\SecurityHeadersMiddleware;
 use app\models\Dispatch;
+use app\models\Requete;
 use app\models\TypeArticle;
 use flight\Engine;
 use flight\net\Router;
@@ -101,6 +102,15 @@ $router->group('', function (Router $router) use ($app) {
         $renderPage('creation-article', [
             'title' => 'Création article',
             'liste_type' => $liste_type
+        ]);
+    });
+
+    $router->get('/stock', function () use ($renderPage){
+        $req = new Requete(Flight::db());
+        $stock = $req->getDON();
+        $renderPage('stock', [
+            'title' => 'Stock',
+            'stock' => $stock
         ]);
     });
 
