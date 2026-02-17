@@ -69,5 +69,29 @@
             $stmt = $this->db->query("SELECT * FROM BNGRC_requete");
             return $stmt->fetchAll();
         }
+
+       public function findDonsByVille($id_ville){
+            $stmt = $this->db->prepare("SELECT BNGRC_article.nom_article,BNGRC_article.prix_unitaire,BNGRC_requete.quantite,BNGRC_requete.date_requete 
+            FROM BNGRC_requete  JOIN BNGRC_ville ON BNGRC_requete.id_ville = BNGRC_ville.id_ville JOIN BNGRC_article ON BNGRC_article.id_article = BNGRC_requete.id_article WHERE BNGRC_requete.etat = 'DON' AND BNGRC_requete.id_ville = ? ");
+            $stmt->execute([$id_ville]);
+            return $stmt->fetchAll();
+        }
+
+        public function findAllRequeteBesoinbyidVille($id) {
+            $stmt = $this->db->prepare("SELECT BNGRC_article.nom_article,BNGRC_article.prix_unitaire,BNGRC_requete.quantite,BNGRC_requete.date_requete 
+            FROM BNGRC_requete  JOIN BNGRC_ville ON BNGRC_requete.id_ville = BNGRC_ville.id_ville JOIN BNGRC_article ON BNGRC_article.id_article = BNGRC_requete.id_article WHERE BNGRC_requete.etat = 'BESOIN' AND BNGRC_requete.id_ville = ? ");
+            $stmt->execute([$id]);
+            return $stmt->fetchAll();
+        }
+
+        public function saveBesoin($id_ville,$qtn,$id_article,$montant) { 
+            $stmt = $this->db->prepare("INSERT INTO BNGRC_requete(id_ville,id_article,quantite,montant_total,date_requete,etat) VALUES (?,?,?,?,CURDATE(),'BESOIN') ");
+            $stmt->execute([$id_ville,$id_article,$qtn,$montant]);
+        }
+
+        public function saveDon($id_ville,$qtn,$id_article,$montant) { 
+            $stmt = $this->db->prepare("INSERT INTO BNGRC_requete(id_ville,id_article,quantite,montant_total,date_requete,etat) VALUES (?,?,?,?,CURDATE(),'DON') ");
+            $stmt->execute([$id_ville,$id_article,$qtn,$montant]);
+        }
     }
 ?>
