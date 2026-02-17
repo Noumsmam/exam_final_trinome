@@ -54,5 +54,12 @@ use app\models\Requete;
             $requete->saveDon($id_ville,$qtn,$id_article,$montant);
             Flight::redirect('/fiche-dons?id='.$id_ville);
         }
+
+        public function getBesoinEnCours() {
+            $req = new Requete(Flight::db());
+            $liste = $req->getBesoinEnCours();
+            return $liste;
+        } 
+
     }
 ?>

@@ -35,6 +35,7 @@ CREATE TABLE BNGRC_requete(
     montant_total DOUBLE NOT NULL,
     date_requete DATE NOT NULL,
     etat VARCHAR(10) NOT NULL, /* BESOIN OU DON */
+    statut VARCHAR(10) NOT NULL,
     FOREIGN KEY (id_ville) REFERENCES BNGRC_ville(id_ville),
     FOREIGN KEY (id_article) REFERENCES BNGRC_article(id_article)
 );

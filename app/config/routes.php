@@ -1,9 +1,11 @@
 <?php
 
 use app\controllers\ArticleController;
+use app\controllers\DispatchController;
 use app\controllers\RequeteController;
 use app\controllers\VilleController;
 use app\middlewares\SecurityHeadersMiddleware;
+use app\models\Dispatch;
 use flight\Engine;
 use flight\net\Router;
 
@@ -105,14 +107,19 @@ $router->group('', function (Router $router) use ($app) {
     });
 
     $router->get('/dispatch', function () use ($renderPage) {
+        $req = new RequeteController();
+        $liste = $req->getBesoinEnCours();
         $renderPage('dispatch', [
-            'title' => 'dispatch'
+            'title' => 'dispatch',
+            'liste' => $liste
         ]);
     });
 
     $router->post('/save_besoin',[RequeteController::class,'saveBesoin']);
 
     $router->post('/save_don',[RequeteController::class,'saveDon']);
+
+    $router->get('/repartir',[DispatchController::class,'repartir']);
 
     // $router->get('/', function() use ($app) {
     // 	$app->render('welcome', [ 'message' => 'You are gonna do great things!' ]);
