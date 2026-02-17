@@ -8,7 +8,6 @@
 </head>
 
 <body>
-
     <div class="liste-ville">
         <?php foreach ($liste as $row) { ?>
             <div class="ville card">

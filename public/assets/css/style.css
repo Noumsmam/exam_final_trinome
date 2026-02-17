@@ -1,4 +1,4 @@
-.view-content{
+.view-content {
     min-height: 700px;
 }
 
@@ -137,7 +137,7 @@
     display: flex;
     flex-direction: column;
     padding: 20px 0 20px 50px;
-    gap: 10px;
+    gap: 20px;
 }
 
 .liste-ville .ville {
@@ -160,7 +160,8 @@
     flex-direction: column;
     padding: 20px 0 20px 50px;
     gap: 10px;
-    min-height: 400px; /* Changé de height à min-height */
+    min-height: 400px;
+    /* Changé de height à min-height */
 }
 
 .liste-besoin .besoin {
@@ -442,7 +443,8 @@ select,
     flex-direction: column;
     gap: 12px;
     padding: 0;
-    min-height: 500px; /* Changé de height à min-height */
+    min-height: 500px;
+    /* Changé de height à min-height */
 }
 
 .dispatch-card {
@@ -566,7 +568,7 @@ select,
     font-weight: bold;
 }
 
-.dispatch-header button{
+.dispatch-header button {
     background: var(--accent);
     color: #000;
     padding: 10px 16px;
@@ -578,11 +580,11 @@ select,
     text-decoration: none;
 }
 
-.filtre{
+.filtre {
     width: 200px;
 }
 
-.filtre form{
+.filtre form {
     display: flex;
     justify-content: space-between;
 }
@@ -599,11 +601,30 @@ select,
     color: #000;
 }
 
-.liste-achats{
+.liste-achats {
     padding: 10px 0 0 0;
 }
 
-.achats-card{
+.achats-card {
     display: flex;
     justify-content: space-between;
+}
+
+.reste-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.dispatch-button button {
+    background: var(--accent);
+    color: #000;
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    width: 90px;
 }

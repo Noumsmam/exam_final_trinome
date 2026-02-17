@@ -8,6 +8,7 @@
 
 <body>
     <div class="liste-besoin">
+        <h2 style="margin: auto;">Liste de dons en stock</h2>
         <div class="liste-ville">
             <?php foreach ($stock as $row) { ?>
 
