@@ -72,7 +72,7 @@
 
        public function findDonsByVille($id_ville){
             $stmt = $this->db->prepare("SELECT BNGRC_article.nom_article,BNGRC_article.prix_unitaire,BNGRC_requete.quantite,BNGRC_requete.date_requete 
-            FROM BNGRC_requete  JOIN BNGRC_ville ON BNGRC_requete.id_ville = BNGRC_ville.id_ville JOIN BNGRC_article ON BNGRC_article.id_article = BNGRC_requete.id_article WHERE BNGRC_requete.etat = 'DON' AND BNGRC_requete.id_ville = ? ");
+            FROM BNGRC_requete  JOIN BNGRC_ville ON BNGRC_requete.id_ville = BNGRC_ville.id_ville JOIN BNGRC_article ON BNGRC_article.id_article = BNGRC_requete.id_article WHERE BNGRC_requete.etat = 'DON' AND BNGRC_requete.id_ville = ? AND BNGRC_requete.statut = 'fini'");
             $stmt->execute([$id_ville]);
             return $stmt->fetchAll();
         }
@@ -90,7 +90,7 @@
         }
 
         public function saveDon($id_ville,$qtn,$id_article,$montant) { 
-            $stmt = $this->db->prepare("INSERT INTO BNGRC_requete(id_ville,id_article,quantite,montant_total,date_requete,etat,statut) VALUES (?,?,?,?,CURDATE(),'DON','fini') ");
+            $stmt = $this->db->prepare("INSERT INTO BNGRC_requete(id_ville,id_article,quantite,montant_total,date_requete,etat,statut) VALUES (?,?,?,?,CURDATE(),'DON','en cours') ");
             $stmt->execute([$id_ville,$id_article,$qtn,$montant]);
         }
 
@@ -128,7 +128,16 @@
             ORDER BY BNGRC_requete.date_requete");
             return $stmt->fetchAll();
         }
-    }
+
+        public function changeStatut($id) {
+            $stmt = $this->db->prepare("UPDATE BNGRC_requete SET statut = 'satisfait' WHERE id_requete = ?");
+            $stmt->execute([$id]);
+        }
+
+        public function changeStatutDon($id) {
+            $stmt = $this->db->prepare("UPDATE BNGRC_requete SET statut = 'epuise' WHERE id_requete = ?");
+            $stmt->execute([$id]);
+        }    }
         
 
         

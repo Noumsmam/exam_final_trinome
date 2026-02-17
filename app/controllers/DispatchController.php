@@ -51,17 +51,18 @@
                             
                             if($nouveauQteDon <= 0) {
                                 // Don totalement consomme : supprimer la ligne
-                                $req->deleteRequete($idDon);
+                                $req->changeStatutDon($idDon);
                                 $don['quantite'] = 0;
                             } else {
                                 // Don partiellement consomme : mettre a jour la quantite
-                                $req->uptdateQuantite($nouveauQteDon, $idDon);
                                 $don['quantite'] = $nouveauQteDon;
+                                $req->uptdateQuantite($nouveauQteDon, $idDon);
                             }
                             
                             // Besoin satisfait
-                            $req->deleteRequete($idBesoin);
+                            $req->changeStatut($idBesoin);
                             $quantiteRestante = 0;
+                            $req->uptdateQuantite($quantiteRestante,$idBesoin);
                         } else {
                             // Le don ne suffit pas : le consommer completement
                             $req->deleteRequete($idDon);
