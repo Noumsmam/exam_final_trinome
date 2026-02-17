@@ -14,7 +14,7 @@
             <input type="text" name="nom" id="nom" required>
 
             <label for="quantite">Quantité</label>
-            <input type="number" name="quantite" id="quantite" min="1" required>
+            <input class="input" type="number" name="quantite" id="quantite" min="1" required>
 
             <label for="type">Unité</label>
             <select name="type" id="type" required>

@@ -25,7 +25,7 @@ if (class_exists('\Flight')) {
   include 'fragments/header.php';
   ?>
 
-  <main id="view-content">
+  <main classe="view-content" id="view-content">
     <?= $content ?>
   </main>
 
