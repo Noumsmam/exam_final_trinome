@@ -39,3 +39,20 @@ CREATE TABLE BNGRC_requete(
     FOREIGN KEY (id_ville) REFERENCES BNGRC_ville(id_ville),
     FOREIGN KEY (id_article) REFERENCES BNGRC_article(id_article)
 );
+
+CREATE TABLE BNGRC_compte(
+    id_compte INT PRIMARY KEY AUTO_INCREMENT,
+    id_ville INT,
+    montant DOUBLE,
+    FOREIGN KEY (id_ville) REFERENCES BNGRC_ville(id_ville) 
+);
+
+CREATE TABLE BNGRC_achat(
+    id_achat INT PRIMARY KEY AUTO_INCREMENT,
+    id_ville INT,
+    id_article INT,
+    quantite DOUBLE,
+    montant DOUBLE,
+    FOREIGN KEY (id_ville) REFERENCES BNGRC_ville(id_ville),
+    FOREIGN KEY (id_article) REFERENCES BNGRC_article(id_article)
+);
