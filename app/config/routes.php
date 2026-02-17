@@ -1,6 +1,8 @@
 <?php
 
-use app\controllers\ApiExampleController;
+use app\controllers\ArticleController;
+use app\controllers\RequeteController;
+use app\controllers\VilleController;
 use app\middlewares\SecurityHeadersMiddleware;
 use flight\Engine;
 use flight\net\Router;
@@ -11,63 +13,119 @@ use flight\net\Router;
  */
 
 // This wraps all routes in the group with the SecurityHeadersMiddleware
-$router->group('', function(Router $router) use ($app) {
+$router->group('', function (Router $router) use ($app) {
 
-	$renderPage = function(string $view, array $data = []) use ($app) {
+    $renderPage = function (string $view, array $data = []) use ($app) {
         // Génère le contenu de la page
         $content = $app->view()->fetch('pages/' . $view . '.php', $data);
-    
+
         // Affiche le layout en injectant le contenu
         $app->render('layout.php', array_merge($data, [
             'content' => $content
         ]));
     };
 
-	$router->get('/', function() use ($renderPage) {
+    $router->get('/', function () use ($renderPage) {
         $renderPage('dashboard', [
             'title' => 'Dashboard'
+            
         ]);
     });
 
 	$router->get('/besoins', function() use ($renderPage) {
+        $villeC = new VilleController();
+        $liste = $villeC->getville();
         $renderPage('besoins', [
-            'title' => 'Besoins'
+            'title' => 'Besoins',
+            'liste' => $liste
         ]);
     });
 
-	$router->get('/dons', function() use ($renderPage) {
+    $router->get('/dons', function () use ($renderPage) {
+        $villeC = new VilleController();
+        $liste = $villeC->getville();
         $renderPage('dons', [
-            'title' => 'Dons'
+            'title' => 'Dons',
+            'liste' => $liste
         ]);
     });
 
-	$router->get('/reste', function() use ($renderPage) {
+    $router->get('/reste', function () use ($renderPage) {
         $renderPage('reste', [
             'title' => 'Dashboard'
         ]);
     });
 
     $router->get('/fiche-besoins', function() use ($renderPage) {
+        $id = $_GET['id'];
+        $villeC = new VilleController();
+        $fiche = $villeC->getVilleFiche($id);
+
+        $articleC = new ArticleController();
+        $liste = $articleC->getArtile();
+
+        $besoin = new RequeteController();
+        $listeBesoin = $besoin->getBesoinByVille($id);
         $renderPage('fiche-besoins', [
-            'title' => 'Fiche besoin'
+            'title' => 'Fiche besoin',
+            'fiche' => $fiche,
+            'listeArticle' => $liste,
+            'listeBesoin' => $listeBesoin
         ]);
     });
 
+    $router->get('/fiche-dons', function () use ($renderPage) {
+        $id = $_GET['id'];
+        $villeC = new VilleController();
+        $fiche = $villeC->getVilleFiche($id);
 
+        $articleC = new ArticleController();
+        $liste = $articleC->getArtile();
 
+        $don = new RequeteController();
+        $listeDon = $don->getDonByVille($id);
+        $renderPage('fiche-dons', [
+            'title' => 'Fiche don',
+            'fiche' => $fiche,
+            'listeArticle' => $liste,
+            'listeDon' => $listeDon
+        ]);
+    });
 
-	// $router->get('/', function() use ($app) {
-	// 	$app->render('welcome', [ 'message' => 'You are gonna do great things!' ]);
-	// });
+    $router->get('/creation-besoin', function () use ($renderPage) {
+        $renderPage('creation-besoin', [
+            'title' => 'Création besoin'
+        ]);
+    });
 
-	// $router->get('/hello-world/@name', function($name) {
-	// 	echo '<h1>Hello world! Oh hey '.$name.'!</h1>';
-	// });
+    $router->get('/creation-don', function () use ($renderPage) {
+        $renderPage('creation-don', [
+            'title' => 'Création don'
+        ]);
+    });
 
-	// $router->group('/api', function() use ($router) {
-	// 	$router->get('/users', [ ApiExampleController::class, 'getUsers' ]);
-	// 	$router->get('/users/@id:[0-9]', [ ApiExampleController::class, 'getUser' ]);
-	// 	$router->post('/users/@id:[0-9]', [ ApiExampleController::class, 'updateUser' ]);
-	// });
-	
-}, [ SecurityHeadersMiddleware::class ]);
+    $router->get('/dispatch', function () use ($renderPage) {
+        $renderPage('dispatch', [
+            'title' => 'dispatch'
+        ]);
+    });
+
+    $router->post('/save_besoin',[RequeteController::class,'saveBesoin']);
+
+    $router->post('/save_don',[RequeteController::class,'saveDon']);
+
+    // $router->get('/', function() use ($app) {
+    // 	$app->render('welcome', [ 'message' => 'You are gonna do great things!' ]);
+    // });
+
+    // $router->get('/hello-world/@name', function($name) {
+    // 	echo '<h1>Hello world! Oh hey '.$name.'!</h1>';
+    // });
+
+    // $router->group('/api', function() use ($router) {
+    // 	$router->get('/users', [ ApiExampleController::class, 'getUsers' ]);
+    // 	$router->get('/users/@id:[0-9]', [ ApiExampleController::class, 'getUser' ]);
+    // 	$router->post('/users/@id:[0-9]', [ ApiExampleController::class, 'updateUser' ]);
+    // });
+
+}, [SecurityHeadersMiddleware::class]);

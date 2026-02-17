@@ -1,44 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
 
     <div class="liste-ville">
-
-        <div class="ville">
-            <p>Antananarivo</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
-        </div>
-
-        <div class="ville">
-            <p>Toamasina</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
-        </div>
-
-        <div class="ville">
-            <p>Fianarantsoa</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
-        </div>
-
-        <div class="ville">
-            <p>Toliara</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
-        </div>
-
-        <div class="ville">
-            <p>Mahajanga</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
-        </div>
-
-        <div class="ville">
-            <p>Antsinanana</p>
-            <a href="<?= BASE_URL ?>/fiche-besoins"><button>Voir besoins</button></a>
-        </div>
-
+        <?php foreach ($liste as $row) { ?>
+            <div class="ville card">
+                <div class="item-info"><span class="title"><?php echo $row['nom_ville']; ?></span></div>
+                <div class="item-actions"><a href="<?= BASE_URL ?>fiche-besoins?id=<?php echo $row['id_ville']; ?>" class="button">Voir besoins</a></div>
+            </div>
+        <?php } ?>
     </div>
 
 </body>
+
 </html>

@@ -15,22 +15,21 @@ if (class_exists('\Flight')) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= $title ?? 'Takalo Takalo' ?></title>
-  <link rel="stylesheet" href="<?=BASE_URL?>assets/css/style.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css">
 </head>
 
 <body>
 
-  <?= BASE_URL ?>
 
   <?php
-    include 'fragments/header.php';
+  include 'fragments/header.php';
   ?>
 
-  <main id="view-content">
+  <main classe="view-content" id="view-content">
     <?= $content ?>
   </main>
 
-  <?php include 'fragments/footer.html';?>
+  <?php include 'fragments/footer.html'; ?>
 
 </body>
 
